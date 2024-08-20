@@ -1,4 +1,4 @@
-## Deploying Abstract Contract
+# Deploying Abstract Contract
 
 ## Step 1: Setup
 ### Installing Hardhat
@@ -14,6 +14,10 @@ npm install dotenv
 ```bash
 npx hardhat init
 ```
+After `npx hardhat init` command, it will ask us for some information, enter it as in the image below
+
+![hardhat2](https://github.com/ToanBm/abstract-contract/blob/main/hardhat-project.jpg)
+
 ### Hardhat Config
 ```bash
 rm hardhat.config.ts && nano hardhat.config.ts
@@ -75,7 +79,7 @@ contract SampleToken is ERC20 {
 ```bash
 npx hardhat compile --network abstractTestnet
 ```
-## Step 2: Deploying the Contract
+## Step 3: Deploying the Contract
 ### Deploy Script
 ```bash
 mkdir deploy && nano deploy/deploy.ts
