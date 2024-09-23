@@ -14,7 +14,7 @@ npm i -D @matterlabs/hardhat-zksync-verify
 
 # Step 2: Create a new project "Create a Typescript Project"
 echo "Creating a Typescript Project..."
-yes "1" | npx hardhat init
+yes "2" | npx hardhat init
 
 # Step 3: Modify the Hardhat configuration 
 echo "Creating new hardhat.config file..."
