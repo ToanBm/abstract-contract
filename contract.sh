@@ -20,7 +20,7 @@ yes "1" | npx hardhat init
 echo "Creating new hardhat.config file..."
 rm hardhat.config.js
 
-cat <<EOL > hardhat.config.js
+cat <<'EOL' > hardhat.config.js
 import { HardhatUserConfig } from "hardhat/config";
  
 import "@matterlabs/hardhat-zksync";
@@ -50,7 +50,7 @@ EOL
 # Step 4: Write a smart contract
 echo "Create ERC20 contract..."
 rm contracts/Lock.sol
-cat <<EOL > contracts/HelloAbstract.sol
+cat <<'EOL' > contracts/HelloAbstract.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
@@ -77,7 +77,7 @@ EOF
 echo "Creating deploy script..."
 mkdir deploy
 
-cat <<EOL > deploy/deploy.ts
+cat <<'EOL' > deploy/deploy.ts
 import { utils, Wallet } from "zksync-ethers";
 import * as ethers from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
