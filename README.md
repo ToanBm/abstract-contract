@@ -2,6 +2,7 @@
 
 ## Start...
 - Open [Github Codespace](https://github.com/codespaces)
+- Bridge ETH from Sepolia to Abstract: [Here](https://portal.testnet.abs.xyz/bridge/)
 - Paste the below command to Deploy Abstract Contract
 ## Auto Setup
 ## 1. Clone the repository
