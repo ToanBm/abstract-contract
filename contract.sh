@@ -18,9 +18,9 @@ npx hardhat init
 
 # Modify the Hardhat configuration 
 echo "Creating new hardhat.config file..."
-rm hardhat.config.js
+rm hardhat.config.ts
 
-cat <<'EOL' > hardhat.config.js
+cat <<'EOL' > hardhat.config.ts
 import { HardhatUserConfig } from "hardhat/config";
  
 import "@matterlabs/hardhat-zksync";
@@ -117,5 +117,9 @@ sleep 5
 echo "Deploy your contracts..."
 npx hardhat deploy-zksync --script deploy.ts --network abstractTestnet
 
-echo "Follow next step to Verifying the Contract"
+echo "Verifying the Contract..."
+read -p "Enter your HelloAbstract was deployed (0x...): " CONTRACT_ADDRESS
+
+npx hardhat verify --network abstractTestnet $CONTRACT_ADDRESS
+
 echo "Thank you!"
