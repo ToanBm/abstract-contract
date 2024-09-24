@@ -4,7 +4,8 @@ echo -e "\033[0;34m"
 echo "Logo is comming soon..."
 echo -e "\e[0m"
 
-# Step 1: Install the required dependencies
+# Step 1: Setup
+# Install the required dependencies
 echo "Install Hardhat..."
 npm install --save-dev hardhat
 npm i -D @matterlabs/hardhat-zksync
@@ -12,11 +13,10 @@ npm install dotenv
 npm install @openzeppelin/contracts
 npm i -D @matterlabs/hardhat-zksync-verify
 
-# Step 2: Create a new project "Create a Typescript Project"
-echo "Creating a Typescript Project..."
-yes "2" | npx hardhat init
+echo "Please chose Creating a Typescript Project"
+npx hardhat init
 
-# Step 3: Modify the Hardhat configuration 
+# Modify the Hardhat configuration 
 echo "Creating new hardhat.config file..."
 rm hardhat.config.js
 
@@ -47,7 +47,10 @@ const config: HardhatUserConfig = {
 export default config;
 EOL
 
-# Step 4: Write a smart contract
+# Step 2: Write a smart contract
+# Installing OpenZeppelin
+npm install @openzeppelin/contracts
+
 echo "Create ERC20 contract..."
 rm contracts/Lock.sol
 cat <<'EOL' > contracts/HelloAbstract.sol
@@ -61,12 +64,12 @@ contract HelloAbstract {
 }
 EOL
 
-# Step 5: Compile the smart contract
+# Compile the smart contract
 echo "Compile your contracts..."
 npx hardhat clean
 npx hardhat compile --network abstractTestnet
 
-# Step 6: Deploy the smart contract
+# Step 3: Deploy the smart contract
 echo "Setting Private Key env..."
 
 read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
@@ -110,10 +113,9 @@ EOL
 # "Waiting before deploying..."
 sleep 5
 
-# Step 8: Deploy the contract to the Hemi network
+# Step 8: Deploy the contract
 echo "Deploy your contracts..."
-npx hardhat deploy-zksync --script deploy.ts
+npx hardhat deploy-zksync --script deploy.ts --network abstractTestnet
 
 echo "Follow next step to Verifying the Contract"
-
 echo "Thank you!"
