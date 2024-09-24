@@ -3,7 +3,18 @@
 ## Start...
 - Open [Github Codespace](https://github.com/codespaces)
 - Paste the below command to Deploy Abstract Contract
-## Step 1: Setup
+## Auto Setup
+## 1. Clone the repository
+```Bash
+git clone https://github.com/ToanBm/abstract-contract.git
+cd abstract-contract
+```
+## 2. Run the setup script
+```bash
+chmod +x contract.sh && ./contract.sh
+```
+
+## Step 1: Manual Setup
 ### Installing Hardhat
 ```bash
 npm install --save-dev hardhat
