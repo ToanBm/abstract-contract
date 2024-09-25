@@ -5,17 +5,22 @@
 - Bridge ETH from Sepolia to Abstract: [Here](https://portal.testnet.abs.xyz/bridge/)
 - Paste the below command to Deploy Abstract Contract
 ## Auto Setup
-## 1. Clone the repository
+### 1. Clone the repository
 ```Bash
-git clone https://github.com/ToanBm/abstract-contract.git
-cd abstract-contract
+git clone https://github.com/ToanBm/abstract-contract.git && cd abstract-contract
 ```
-## 2. Run the setup script
+### 2. Run the setup script
 ```bash
 chmod +x contract.sh && ./contract.sh
 ```
+- Please choose and enter 4 times
+![hardhat2](https://github.com/ToanBm/abstract-contract/blob/main/hardhat.jpg)
+- Enter your EVM wallet private key
+- Enter your HelloAbstract to verify
 
-## Step 1: Manual Setup
+## Done!
+------------------------------------------------------------------------------------------
+## Manual Setup
 ### Installing Hardhat
 ```bash
 npm install --save-dev hardhat
@@ -31,7 +36,7 @@ npx hardhat init
 ```
 After `npx hardhat init` command, it will ask us for some information, enter it as in the image below
 
-![hardhat2](https://github.com/ToanBm/abstract-contract/blob/main/hardhat-project.jpg)
+![hardhat2](https://github.com/ToanBm/abstract-contract/blob/main/hardhat.jpg)
 
 ### Hardhat Config
 ```bash
@@ -65,7 +70,7 @@ const config: HardhatUserConfig = {
  
 export default config;
 ```
-## Step 2: Writing the Contract
+### Writing the Contract
 ### Installing OpenZeppelin
 ```bash
 npm install @openzeppelin/contracts
@@ -94,7 +99,7 @@ contract SampleToken is ERC20 {
 ```bash
 npx hardhat compile --network abstractTestnet
 ```
-## Step 3: Deploying the Contract
+### Deploying the Contract
 ### Deploy Script
 ```bash
 mkdir deploy && nano deploy/deploy.ts
