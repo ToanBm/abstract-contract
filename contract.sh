@@ -106,20 +106,49 @@ export default async function (hre: HardhatRuntimeEnvironment) {
   const tokenContract = await deployer.deploy(artifact);
  
   // Show the contract info.
-  console.log(`${artifact.contractName} was deployed to ${await tokenContract.getAddress()}`);
+  const contractAddress = await tokenContract.getAddress();
+  console.log(`${artifact.contractName} was deployed to ${contractAddress}`);
+
+  // Lưu địa chỉ contract vào file tạm thời
+  const fs = require("fs");
+  fs.writeFileSync("./latest_contract_address.txt", contractAddress);
+
+  console.log("Contract address saved to 'latest_contract_address.txt'");
 }
 EOL
 
 # "Waiting before deploying..."
 sleep 5
 
-# Step 8: Deploy the contract
-echo "Deploy your contracts..."
-npx hardhat deploy-zksync --script deploy.ts --network abstractTestnet
+# Step 1: Nhập số lượng contract cần tạo
+read -p "Enter the number of contracts to deploy: " NUMBER_OF_CONTRACTS
 
-echo "Verifying the Contract..."
-read -p "Enter your HelloAbstract was deployed (0x...): " CONTRACT_ADDRESS
+# Kiểm tra input có phải là số hợp lệ không
+if ! [[ "$NUMBER_OF_CONTRACTS" =~ ^[0-9]+$ ]]; then
+  echo "Invalid input. Please enter a valid number."
+  exit 1
+fi
 
-npx hardhat verify --network abstractTestnet $CONTRACT_ADDRESS
+# Deploy và verify từng contract
+for ((i=1; i<=NUMBER_OF_CONTRACTS; i++)); do
+  print_command "Deploying contract #$i..."
+  
+# Deploy contract và lấy địa chỉ từ file tạm
+  npx hardhat deploy-zksync --script deploy.ts --network abstractTestnet
 
+ # Đọc địa chỉ contract từ file tạm
+  if [ -f "./latest_contract_address.txt" ]; then
+    CONTRACT_ADDRESS=$(cat ./latest_contract_address.txt)
+    print_command "Contract #$i deployed at address: $CONTRACT_ADDRESS"
+  else
+    echo "Error: Could not find the contract address file."
+    exit 1
+  fi
+
+ # Verify contract
+  print_command "Verifying contract #$i at address $CONTRACT_ADDRESS..."
+  npx hardhat verify --network abstractTestnet $CONTRACT_ADDRESS
+done
+
+print_command "Successfully deployed and verified $NUMBER_OF_CONTRACTS contracts!"
 echo "Thank you!"
