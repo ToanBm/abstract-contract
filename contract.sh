@@ -1,4 +1,13 @@
 #!/bin/bash
+
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+YELLOW=$(tput setaf 3)
+
+print_command() {
+  echo -e "${BOLD}${YELLOW}$1${RESET}"
+}
+
 # Logo
 echo -e "\033[0;34m"
 echo "Logo is comming soon..."
