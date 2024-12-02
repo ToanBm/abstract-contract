@@ -145,7 +145,7 @@ for ((i=1; i<=NUMBER_OF_CONTRACTS; i++)); do
 # Deploy contract và lấy địa chỉ từ file tạm
   npx hardhat deploy-zksync --script deploy.ts --network abstractTestnet
 
- # Đọc địa chỉ contract từ file tạm
+# Đọc địa chỉ contract từ file tạm
   if [ -f "./latest_contract_address.txt" ]; then
     CONTRACT_ADDRESS=$(cat ./latest_contract_address.txt)
     print_command "Contract #$i deployed at address: $CONTRACT_ADDRESS"
@@ -153,10 +153,19 @@ for ((i=1; i<=NUMBER_OF_CONTRACTS; i++)); do
     echo "Error: Could not find the contract address file."
     exit 1
   fi
-
- # Verify contract
+# Thời gian chờ ngẫu nhiên từ 3 đến 7 giây
+  RANDOM_DELAY=$(shuf -i 3-7 -n 1)  # Chọn số ngẫu nhiên từ 3 đến 7
+  echo "Waiting for $RANDOM_DELAY seconds before verifying contract..."
+  sleep $RANDOM_DELAY
+  
+# Verify contract
   print_command "Verifying contract #$i at address $CONTRACT_ADDRESS..."
   npx hardhat verify --network abstractTestnet $CONTRACT_ADDRESS
+
+# Thời gian chờ ngẫu nhiên sau khi verify
+  RANDOM_DELAY=$(shuf -i 3-7 -n 1)  # Chọn số ngẫu nhiên từ 3 đến 7
+  echo "Waiting for $RANDOM_DELAY seconds before next deploy..."
+  sleep $RANDOM_DELAY
 done
 
 print_command "Successfully deployed and verified $NUMBER_OF_CONTRACTS contracts!"
